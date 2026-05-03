@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ezeanya Youth Villa</title>
+    <link rel="stylesheet" href="style.css" />
+        <style>
+            #backToTop {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                background: #006400;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                font-size: 24px;
+                cursor: pointer;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                z-index: 9999;
+                transition: all 0.3s ease;
+            }
+        
+            #backToTop:hover {
+                background: #004d00;
+                transform: scale(1.1);
+            }
+        </style>
+        </head>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="Ezeanya Logo.jpg" alt="Ezeanya Youth Villa Logo" class="logo-img">
+                <div class="association-name">
+                    Ezeanya<span class="highlight"> Youth Villa</span>
+                </div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+
+            <div class="nav-right" id="navRight">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="members.html">Our Database</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Get in Touch</h2>
+            <p class="about-text" style="margin-bottom: 4rem;">
+                We'd love to hear from you! Whether you have questions, suggestions, want to join our activities,
+                or would like to partner with Ezeanya Youth Villa, feel free to reach out.
+            </p>
+
+            <div class="grid-3">
+                <div class="card" style="text-align: center;">
+                    <h3>WhatsApp / Phone</h3>
+                    <p style="font-size: 1.4rem; margin: 1.5rem 0; color: #006400;"><strong>+234 803 123
+                            4567</strong></p>
+                    <p style="margin-bottom: 1.5rem;">(President – Chukwuma Okeke)<br>Preferred for quick messages
+                        and group coordination </p><a
+                        href="https://wa.me/2348031234567?text=Hello%20Ezeanya%20Youth%20Villa%20team"
+                        target="_blank" rel="noopener noreferrer"
+                        style="display: inline-block; background: #25D366; color: white; padding: 0.9rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 600;">Message
+                        on WhatsApp → </a>
+                        <section>
+                            </div>
+        </section>
+    </main>
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const navRight = document.getElementById('navRight');
+
+    hamburger.addEventListener('click', () => {
+        navRight.classList.toggle('active');
+
+        if (navRight.classList.contains('active')) {
+            hamburger.textContent = '✕';
+        } else {
+            hamburger.textContent = '☰';
+        }
+    });
+
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navRight.classList.remove('active');
+            hamburger.textContent = '☰';
+        });
+    });
+</script>
+
+        <footer>
+            <p>© 2026 Ezeanya Youth Villa • Umuezeanya Quarter • Umuoba Anam, Anambra East LGA</p>
+        </footer>
+        
+        <button id="backToTop" title="Back to Top">↑</button>
+        
+        <script src="script.js"></script>
+        
+        <script>
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backToTop.style.display = 'flex';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        </script>
+        </body>
+        </html>

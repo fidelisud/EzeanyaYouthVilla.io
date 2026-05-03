@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events - Ezeanya Youth Villa</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #006400;
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-img {
+            width: 54px;
+            height: 54px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #ff6200;
+            background: #fff;
+        }
+
+        .association-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .association-name .highlight {
+            color: #ff6200;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2.2rem;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 0.4rem 0.3rem;
+            transition: all 0.22s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: #ffdd57;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.4rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 820px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-right {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 280px;
+                background: #006400;
+                transform: translateX(100%);
+                transition: transform 0.35s ease;
+                z-index: 999;
+                padding-top: 90px;
+                box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
+            }
+
+            .nav-right.active {
+                transform: translateX(0);
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem 2.5rem;
+                gap: 1.4rem;
+            }
+
+            .nav-menu li a {
+                font-size: 1.25rem;
+                padding: 0.6rem 0;
+                width: 100%;
+            }
+        }
+
+        main {
+            padding-top: 100px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            color: #4b5563;
+            text-align: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        article {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-upcoming h3 {
+            color: #006400;
+            margin-bottom: 1rem;
+        }
+
+        .event-past h3 {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        article p {
+            margin: 0.6rem 0;
+            line-height: 1.6;
+        }
+
+        article strong {
+            color: #006400;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #e2e8f0;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+    </style>
+        <style>
+            #backToTop {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                background: #006400;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                font-size: 24px;
+                cursor: pointer;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                z-index: 9999;
+                transition: all 0.3s ease;
+            }
+        
+            #backToTop:hover {
+                background: #004d00;
+                transform: scale(1.1);
+            }
+        </style>
+        </head>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="Ezeanya Logo.jpg" alt="Ezeanya Youth Villa Logo" class="logo-img">
+                <div class="association-name">
+                    Ezeanya<span class="highlight"> Youth Villa</span>
+                </div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+
+            <div class="nav-right" id="navRight">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="members.html">Our Database</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Our Events</h2>
+            <p class="about-text">
+                Stay updated with upcoming programs, Meetings, Celebrations 
+                and past highlights from Ezeanya Youth Villa
+            </p>
+
+            <h3 style="text-align: center; color: #006400; margin: 3rem 0 2rem; font-size: 2rem;">
+                Upcoming Events
+            </h3>
+
+            <div class="grid-3">
+                <article class="event-upcoming">
+                    <h3>Annual General Meeting & End-of-Year Celebration</h3>
+                    <p><strong>Date:</strong> December 20, 2026</p>
+                    <p><strong>Time:</strong> 10:00 AM – 5:00 PM</p>
+                    <p><strong>Venue:</strong> Umuezeanya Village Square, Umuoba</p>
+                    <p>All members are expected to attend. Family, friends and well-wishers are welcome. Contributions
+                        towards food, awards and logistics appreciated.</p>
+                </article>
+
+                <article class="event-upcoming">
+                    <h3>Digital Skills & Freelancing Workshop</h3>
+                    <p><strong>Date:</strong> June 14–15, 2026</p>
+                    <p><strong>Time:</strong> 9:00 AM – 3:00 PM daily</p>
+                    <p><strong>Venue:</strong> Community Secondary School Hall, Umuoba</p>
+                    <p>Free training on graphic design, content creation, social media marketing and Upwork/Fiverr
+                        basics. Certificates will be issued.</p>
+                </article>
+
+                <article class="event-upcoming">
+                    <h3>Umuezeanya Inter-House Sports & Cultural Day</h3>
+                    <p><strong>Date:</strong> August 15, 2026</p>
+                    <p><strong>Time:</strong> 8:00 AM – 4:00 PM</p>
+                    <p><strong>Venue:</strong> Community Field, Umuezeanya</p>
+                    <p>Football, volleyball, traditional dance, debate & talent show. Open to all youths and families.
+                    </p>
+                </article>
+            </div>
+
+            <h3 style="text-align: center; color: #4b5563; margin: 5rem 0 2rem; font-size: 2rem;">
+                Past Events
+            </h3>
+
+            <div class="grid-3">
+                <article class="event-past">
+                    <h3>2025 Skill Acquisition Bootcamp</h3>
+                    <p><strong>Date:</strong> October 10–12, 2025</p>
+                    <p>Over 45 youths trained in phone hardware repair, basic tailoring and hair styling. Sponsored by
+                        community donations and partners.</p>
+                </article>
+
+                <article class="event-past">
+                    <h3>End-of-Year Party & Awards Night 2025</h3>
+                    <p><strong>Date:</strong> December 28, 2025</p>
+                    <p>Recognition of outstanding members, cultural performances, games and lots of food. Best attended
+                        event of the year.</p>
+                </article>
+
+                <article class="event-past">
+                    <h3>Back-to-School Support & Seminar</h3>
+                    <p><strong>Date:</strong> September 6, 2025</p>
+                    <p>Distribution of educational materials to students + motivational talk on discipline and goal
+                        setting.</p>
+                </article>
+
+                <article class="event-past">
+                    <h3>Umuezeanya Youth Football Tournament</h3>
+                    <p><strong>Date:</strong> August 2025</p>
+                    <p>12 teams competed. Winners received trophies, cash prizes and medals. Raised funds for community
+                        projects.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const navRight = document.getElementById('navRight');
+
+    hamburger.addEventListener('click', () => {
+        navRight.classList.toggle('active');
+
+        if (navRight.classList.contains('active')) {
+            hamburger.textContent = '✕';
+        } else {
+            hamburger.textContent = '☰';
+        }
+    });
+
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navRight.classList.remove('active');
+            hamburger.textContent = '☰';
+        });
+    });
+</script>
+        <footer>
+            <p>© 2026 Ezeanya Youth Villa • Umuezeanya Quarter • Umuoba Anam, Anambra East LGA</p>
+        </footer>
+        
+        <button id="backToTop" title="Back to Top">↑</button>
+        
+        <script src="script.js"></script>
+        
+        <script>
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backToTop.style.display = 'flex';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        </script>
+        </body>
+        </html>
